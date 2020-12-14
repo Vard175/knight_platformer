@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 14f;
     public Transform groundCheckPoint;
     public LayerMask groundLayer;
+    public int coins = 0;
     //public float froundCheckRadius;
     Collider2D isTouchingGound;
    
@@ -85,6 +86,15 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         transform.parent = null;
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Collectable")
+        {
+            Destroy(collision.gameObject);
+            coins++;
+        }
+
     }
 
 }
