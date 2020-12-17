@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     private State currentState = State.idle;
  
     public float speed = 500f;
-    public float jumpForce = 14f;
+    public float jumpForce = 12f;
     public Transform groundCheckPoint;
     public LayerMask groundLayer;
     bool isGrounded;
@@ -16,23 +16,20 @@ public class PlayerController : MonoBehaviour
   
     private Rigidbody2D _body;
     private Animator _anim;
-    private CircleCollider2D _circle;
-
 
     void Start()
     {
         _body = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
-        _circle = GetComponent<CircleCollider2D>();
     }
-
 
     void Update()
     {
+        GroundCheck();
         if (currentState!=State.hurt)
              Running();
-   
-    Jumping();
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+            Jumping();
         AnimationStates();
         _anim.SetInteger("state", (int)currentState);
 
@@ -43,19 +40,25 @@ public class PlayerController : MonoBehaviour
             transform.parent = other.gameObject.transform;
         if (other.gameObject.CompareTag("Enemy"))
         {
+            Debug.Log(currentState);
             if (currentState == State.falling)
-                Destroy(other.gameObject);
-           else
             {
-                currentState = State.hurt;
+                _body.AddForce(Vector2.up * 6f, ForceMode2D.Impulse);
+                Destroy(other.gameObject);
+            }
+            else
+            {
                 if (other.gameObject.transform.position.x > transform.position.x)
                     _body.velocity = new Vector2(-hurtForce, _body.velocity.y);
-                else if (other.gameObject.transform.position.x < transform.position.x)
+                else
                     _body.velocity = new Vector2(hurtForce, _body.velocity.y);
                 currentState = State.hurt;
-
             }
         }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        transform.parent = null;
     }
     private void Running()
     {
@@ -68,37 +71,36 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector3(Mathf.Sign(deltaX), 1, 1);
         }
     }
+
+    private void GroundCheck()
+    {
+        Collider2D groundTouch = Physics2D.OverlapCircle(groundCheckPoint.position, 0.2f, groundLayer);
+        isGrounded = false;
+        if (groundTouch != null)
+            isGrounded = true;
+    }
     private void Jumping()
     {
-        Collider2D[] groundTouch = Physics2D.OverlapCircleAll(groundCheckPoint.position, 0.2f);
-        isGrounded = false;
-        if (groundTouch.Length > 1)
-            isGrounded = true;
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
             currentState = State.jumping;
             _body.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        }
     }
-      private void AnimationStates()
-      {
-
-
+    private void AnimationStates()
+    {
         if (currentState == State.jumping)
         {
-           if (_body.velocity.y < 0.1f)
+            if (_body.velocity.y < 0.1f)
             {
                 currentState = State.falling;
             }
         }
         else if (currentState == State.falling)
-         {
+        {
             if (isGrounded)
             {
                 currentState = State.idle;
             }
         }
-         else if (currentState == State.hurt)
+        else if (currentState == State.hurt)
         {
             if (Mathf.Abs(_body.velocity.x) < 0.2f)
             {
@@ -106,7 +108,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         else
-        if (Mathf.Abs(_body.velocity.x) > 0.2f)
+       if (Mathf.Abs(_body.velocity.x) > 0.2f)
         {
             currentState = State.running;
         }
@@ -114,13 +116,7 @@ public class PlayerController : MonoBehaviour
         {
             currentState = State.idle;
         }
-      }
-   
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        transform.parent = null;
     }
-
 }
 
 

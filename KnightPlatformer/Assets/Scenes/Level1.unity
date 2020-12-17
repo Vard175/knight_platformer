@@ -9648,12 +9648,12 @@ PrefabInstance:
     - target: {fileID: 1568809802094793939, guid: 75cb9f2d83fe3aa45a37135bdc2d21cf,
         type: 3}
       propertyPath: speed
-      value: 1200
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 1568809802094793939, guid: 75cb9f2d83fe3aa45a37135bdc2d21cf,
         type: 3}
       propertyPath: jumpForce
-      value: 14
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1568809802094793940, guid: 75cb9f2d83fe3aa45a37135bdc2d21cf,
         type: 3}
@@ -9872,11 +9872,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Platform
-      objectReference: {fileID: 0}
-    - target: {fileID: 8546059766079560027, guid: 40acc508c94fe184d856c6c7b5cb400b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40acc508c94fe184d856c6c7b5cb400b, type: 3}
