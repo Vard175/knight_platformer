@@ -15,4 +15,4 @@ public class CoinCollector : MonoBehaviour
         }
 
     }
-}
+} 

@@ -1234,7 +1234,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.64000034, y: 1.86, z: -10}
+  m_LocalPosition: {x: 0.63999987, y: 1.86, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1276,7 +1276,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 580045182}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 36, y: 3.5320315, z: 30.748438}
+  m_LocalPosition: {x: 35.5, y: 3.5320315, z: 30.748438}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2077490108}
@@ -8708,7 +8708,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1832943364}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 32, y: 3.5320315, z: 30.748438}
+  m_LocalPosition: {x: 32.5, y: 3.5320315, z: 30.748438}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2077490108}
@@ -9216,7 +9216,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1971038515}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.64000034, y: 1.86, z: -10}
+  m_LocalPosition: {x: 0.63999987, y: 1.86, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 256191001}
@@ -9634,10 +9634,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1568809801023193381, guid: 75cb9f2d83fe3aa45a37135bdc2d21cf,
+        type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000,
+        type: 0}
     - target: {fileID: 1568809802094793938, guid: 75cb9f2d83fe3aa45a37135bdc2d21cf,
         type: 3}
       propertyPath: m_Name
       value: Player_Knight
+      objectReference: {fileID: 0}
+    - target: {fileID: 1568809802094793939, guid: 75cb9f2d83fe3aa45a37135bdc2d21cf,
+        type: 3}
+      propertyPath: speed
+      value: 1200
+      objectReference: {fileID: 0}
+    - target: {fileID: 1568809802094793939, guid: 75cb9f2d83fe3aa45a37135bdc2d21cf,
+        type: 3}
+      propertyPath: jumpForce
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 1568809802094793940, guid: 75cb9f2d83fe3aa45a37135bdc2d21cf,
         type: 3}
@@ -9694,6 +9710,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1568809802094793941, guid: 75cb9f2d83fe3aa45a37135bdc2d21cf,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 401ad923c85fa784eb7fd1dc46de32bc, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75cb9f2d83fe3aa45a37135bdc2d21cf, type: 3}
 --- !u!1001 &6237372533921404853
