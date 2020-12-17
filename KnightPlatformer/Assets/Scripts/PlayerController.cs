@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private enum State { idle, running, jumping, hurt };
+    private enum State { idle, running, jumping,falling, hurt };
     private State currentState = State.idle;
-
+  /* private State currentState
+    {
+        get { return (State)_anim.GetInteger("state"); }
+        set { _anim.SetInteger("state", (int)value); }
+    }*/
     public float speed = 500f;
     public float jumpForce = 14f;
     public Transform groundCheckPoint;
@@ -19,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private Animator _anim;
     private CircleCollider2D _circle;
 
+
     void Start()
     {
         _body = GetComponent<Rigidbody2D>();
@@ -29,30 +34,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        //running
-        float deltaX = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-        Vector2 movement = new Vector2(deltaX, _body.velocity.y);
-        _body.velocity = movement;
-        _anim.SetFloat("Speed", Mathf.Abs(deltaX));
-        if (_body.velocity.x > 0)
-            currentState = State.running;
-
-        if (!Mathf.Approximately(deltaX, 0))
-        {
-            transform.localScale = new Vector3(Mathf.Sign(deltaX), 1, 1);
-        }
-
-        //jumping with a groundcheck
-        Collider2D[] groundTouch = Physics2D.OverlapCircleAll(groundCheckPoint.position,0.2f);
-        isGrounded = false;
-        if (groundTouch.Length>1)
-            isGrounded = true;
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            currentState = State.jumping;
-            _body.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        }
-       _anim.SetBool("IsJumping", !isGrounded);
+        if (currentState!=State.hurt)
+             Running();
+   
+    Jumping();
+        AnimationStates();
+        _anim.SetInteger("state", (int)currentState);
 
     }
     private void OnCollisionEnter2D(Collision2D other)
@@ -61,10 +48,11 @@ public class PlayerController : MonoBehaviour
             transform.parent = other.gameObject.transform;
         if (other.gameObject.CompareTag("Enemy"))
         {
-            if (currentState == State.jumping)
+            if (currentState == State.falling)
                 Destroy(other.gameObject);
            else
             {
+                currentState = State.hurt;
                 if (other.gameObject.transform.position.x > transform.position.x)
                     _body.velocity = new Vector2(-hurtForce, _body.velocity.y);
                 else if (other.gameObject.transform.position.x < transform.position.x)
@@ -74,10 +62,76 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    private void Running()
+    {
+        //running
+        float deltaX = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+        Vector2 movement = new Vector2(deltaX, _body.velocity.y);
+        _body.velocity = movement;
+      
+        if (!Mathf.Approximately(deltaX, 0))
+        {
+            transform.localScale = new Vector3(Mathf.Sign(deltaX), 1, 1);
+        }
+    }
+    private void Jumping()
+    {
+        //jumping with a groundcheck
+        Collider2D[] groundTouch = Physics2D.OverlapCircleAll(groundCheckPoint.position, 0.2f);
+        isGrounded = false;
+        if (groundTouch.Length > 1)
+            isGrounded = true;
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
+            currentState = State.jumping;
+            _body.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
+       
+       // _anim.SetBool("IsJumping", !isGrounded);
+    }
+      private void AnimationStates()
+      {
+
+
+        if (currentState == State.jumping)
+        {
+           if (_body.velocity.y < 0.1f)
+            {
+                currentState = State.falling;
+            }
+        }
+        else if (currentState == State.falling)
+         {
+            if (isGrounded)
+            {
+                currentState = State.idle;
+            }
+        }
+         else if (currentState == State.hurt)
+        {
+            if (Mathf.Abs(_body.velocity.x) < 0.2f)
+            {
+                currentState = State.idle;
+            }
+        }
+        else
+        if (Mathf.Abs(_body.velocity.x) > 0.2f)
+        {
+            currentState = State.running;
+        }
+        else
+        {
+            currentState = State.idle;
+        }
+        Debug.Log(currentState);
+      }
+   
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         transform.parent = null;
     }
+
 }
 
 
