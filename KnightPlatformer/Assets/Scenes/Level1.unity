@@ -273,6 +273,8 @@ GameObject:
   - component: {fileID: 121834589}
   - component: {fileID: 121834591}
   - component: {fileID: 121834590}
+  - component: {fileID: 121834592}
+  - component: {fileID: 121834593}
   m_Layer: 0
   m_Name: Skelet
   m_TagString: Enemy
@@ -358,7 +360,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 121834585}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.21, y: -2.39, z: 14.406864}
+  m_LocalPosition: {x: 10.98, y: -2.29, z: 14.406864}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1357753367}
@@ -398,7 +400,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 121834585}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf27bc5a3f11dbf43b6f6ec57f1714a6, type: 3}
   m_Name: 
@@ -430,6 +432,36 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &121834592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121834585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f26c8c061bb4f884fb62de2e95c995aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  castPos: {fileID: 1357753367}
+  baseCastDist: 0.2
+--- !u!58 &121834593
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121834585}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.42434216, y: -0.60869884}
+  serializedVersion: 2
+  m_Radius: 0.16584682
 --- !u!1 &129662948
 GameObject:
   m_ObjectHideFlags: 0
@@ -1276,7 +1308,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6399989, y: 1.86, z: -10}
+  m_LocalPosition: {x: 0.6399994, y: 1.86, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -8456,9 +8488,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1357753367}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: CastPos
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -9487,7 +9519,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1971038515}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6399989, y: 1.86, z: -10}
+  m_LocalPosition: {x: 0.6399994, y: 1.86, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 256191001}
