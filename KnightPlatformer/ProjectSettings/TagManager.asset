@@ -7,6 +7,7 @@ TagManager:
   - MovingPlatform
   - Collectable
   - Enemy
+  - WinningPoint
   layers:
   - Default
   - TransparentFX
